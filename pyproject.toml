@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "async_redis"}]
 
 [tool.poetry.dependencies]
-python = "3.11.5"
+python = "3.11.6"
 rich = "^13.5.2"
 redis = {extras = ["hiredis"], version = "^5.0.0"}
 pydomkeys = {git = "https://github.com/darrylwest/pydomkeys"}
@@ -25,6 +25,7 @@ refurb = "^1.21.0"
 ruff = "^0.0.287"
 pytest-asyncio = "^0.21.1"
 httpx = "^0.24.1"
+bpython = "^0.24"
 
 [tool.ruff]
 # Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.

@@ -2,7 +2,7 @@
 project := "async_redis"
 
 export PYTHONPATH := "async_redis/"
-export PYTHON := "/Library/Frameworks/Python.framework/Versions/3.11/bin/bpython"
+# export PYTHON := "/Library/Frameworks/Python.framework/Versions/3.11/bin/bpython"
 
 alias cov := cover
 alias form := format
@@ -54,7 +54,7 @@ watch:
     
 # launch bpython and start with .repl-start.py script
 repl:
-    poetry run $PYTHON -i .repl-start.py
+    poetry run bpython -i .repl-start.py
 
 # precommit tasks including test, cover, format, ruff, refurb and mypy
 precommit:

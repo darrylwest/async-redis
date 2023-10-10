@@ -15,13 +15,15 @@ import platform
 user_home = Path.home().as_posix()
 
 if platform.system() == 'Linux':
-    libpath = Path(f'{user_home}/.cache/pypoetry/virtualenvs/petnet-app-c3NNDXsb-py3.11/lib/python3.11/site-packages').as_posix()
+    libpath = Path(f'{user_home}/.cache/pypoetry/virtualenvs/-c3NNDXsb-py3.11/lib/python3.11/site-packages').as_posix()
 else:
-    libpath = Path(f'{user_home}/Library/Caches/pypoetry/virtualenvs/petnet-app-I8h4Bcsw-py3.11/lib/python3.11/site-packages').as_posix()
+    libpath = Path(f'{user_home}/Library/Caches/pypoetry/virtualenvs/async-redis-QD0qW_SU-py3.11/lib/python3.11/site-packages').as_posix()
 
 sys.path.append(libpath)
 
 from tests import test_main
+from async_redis import main
+from async_redis.main import Config
 
 from faker import Faker
 
