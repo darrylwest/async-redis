@@ -18,7 +18,7 @@ test:
 # run the standard tests + clippy and fmt
 cover:
     poetry run coverage report -m
-    poetry run coverage html --title="Redis Farm Test Coverage"
+    poetry run coverage html --title="Async Redis Test Coverage"
 
 # invoke black, isort, ruff with --fix flag
 format:

@@ -2,7 +2,7 @@
 
 from rich import inspect
 
-from redis_farm.loglib import LogLib
+from async_redis.loglib import LogLib
 import logging
 
 

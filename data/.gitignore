@@ -1,0 +1,4 @@
+test-*
+*.rdb
+redis-11*
+*.pid

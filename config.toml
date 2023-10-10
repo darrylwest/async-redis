@@ -1,0 +1,26 @@
+[AsyncRedis]
+name = "default async redis"
+version = "1.0.0"
+template = "data/redis-template.conf"
+host = "localhost"
+port = 2900
+logs = "logs"
+data = "data"
+
+[TestAsync]
+name = "test redis instances"
+version = "0.0.0"
+template = "data/test-template.conf"
+host = "localhost"
+port = 2700
+logs = "logs"
+data = "data"
+dryrun = true
+
+[BadFarm]
+version = ""
+template = "not-a-file"
+host = ""
+port = -2
+logs = "logs"
+data = "data"

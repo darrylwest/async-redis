@@ -18,7 +18,7 @@ class LogLib:
     @staticmethod
     def init_logger():
         """Initialize the database logger."""
-        name = "farm"
+        name = "async-redis"
         lib = LogLib(name)
         lib.init_file_logger(f"logs/{name}.log")
 
