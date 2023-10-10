@@ -1,19 +1,16 @@
 """Main project logic."""
 
 import logging
-import sys
 import tomllib
 from pathlib import Path
 from typing import Self
 
 import rich.repr
 from rich.console import Console
-from rich.table import Table
-
-from async_redis import __version__ as vers
 
 log = logging.getLogger("main")
 console = Console()
+
 
 @rich.repr.auto
 class Config:
@@ -129,5 +126,3 @@ def read_template(template_filename: str) -> list[str]:
             lines.append(line.strip())
 
     return lines
-
-
