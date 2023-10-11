@@ -20,12 +20,6 @@ async def start(args: list) -> None:
     ctx = Config.from_toml(cfg["AsyncRedis"])
     log.info(f"{ctx}")
 
-    # TODO(dpw): move this inside config
-    data_path = Path(f"{ctx.data}/redis-{ctx.port}.conf")
-    lines = config.read_template(ctx.template)
-    config.write_config(data_path, ctx.port, lines)
-
-
 def shutdown():
     """Shutdown the application."""
     log.info("application shutdown...")
