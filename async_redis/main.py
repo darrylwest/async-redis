@@ -1,6 +1,5 @@
 """Main project logic."""
 
-import atexit
 import logging
 import tomllib
 from pathlib import Path
@@ -146,4 +145,3 @@ def shutdown():
     log.info("application shutdown...")
 
 
-atexit.register(shutdown)

@@ -3,14 +3,17 @@
 # 2023-10-11 20:40:38
 
 import asyncio
+import atexit
 import sys
-from async_redis.main import start
+from async_redis.main import start, shutdown
 from pathlib import Path
 
 if __name__ == '__main__':
     log_dir = Path('logs')
     if not log_dir.exists():
         Path.mkdir(log_dir)
+
+    atexit.register(shutdown)
 
     asyncio.run(start(sys.argv[1:]))
 
