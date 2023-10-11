@@ -1,6 +1,5 @@
 """Aysnc Redis Tests"""
 
-from rich import inspect
 import tomllib
 from pathlib import Path
 
