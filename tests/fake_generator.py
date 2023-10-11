@@ -2,7 +2,6 @@
 # dpw@plaza.localdomain
 # 2023-10-11 17:36:50
 
-import sys
 from rich import inspect
 from dataclasses import dataclass
 from pydomkeys.keys import KeyGen
@@ -20,7 +19,8 @@ class TestUser:
     last_name: str
     email: str
     phone: str
-    age: int
+    birth_year: int
+
 
 class FakeData:
     def __init__(self):
@@ -32,15 +32,15 @@ class FakeData:
         return self.today.year - self.fake.random_int(min_age, max_age)
 
     def phone(self) -> str:
-        return f'{self.fake.random_int(100,999)}-{self.fake.random_int(100,999)}-{self.fake.random_int(1000, 9999)}'
+        return f"{self.fake.random_int(100,999)}-{self.fake.random_int(100,999)}-{self.fake.random_int(1000, 9999)}"
 
     def create_user(self) -> TestUser:
         now = time()
         key = self.keygen.route_key()
         fname = self.fake.first_name()
         lname = self.fake.last_name()
-        suffix = f'{self.fake.random_digit_above_two()}{self.fake.random_digit()}'
-        email = f'{fname.lower()}.{lname.lower()}-{suffix}@{self.fake.domain_name()}'
+        suffix = f"{self.fake.random_digit_above_two()}{self.fake.random_digit()}"
+        email = f"{fname.lower()}.{lname.lower()}-{suffix}@{self.fake.domain_name()}"
 
         test_user = TestUser(
             key=key,
@@ -50,18 +50,24 @@ class FakeData:
             last_name=lname,
             email=email,
             phone=self.phone(),
-            age=self.birth_year(),
+            birth_year=self.birth_year(),
         )
 
         return test_user
-        
 
-def main(args: list) -> None:
-    print(f'{args}')
+    def create_users(self, count: int = 10):
+        """a generator to create many users"""
+        return (self.create_user() for _n in range(count))
+
+
+def main() -> None:
     fake_data = FakeData()
-    user = fake_data.create_user()
+    gen = fake_data.create_users(2)
+    user = next(gen)
+    inspect(user)
+    user = next(gen)
     inspect(user)
 
-if __name__ == '__main__':
-    main(sys.argv[1:])
 
+if __name__ == "__main__":
+    main()
