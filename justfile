@@ -8,9 +8,14 @@ alias form := format
 alias pre := precommit
 alias todo := todos
 
+# run the application
+run:
+    /bin/rm -fr logs
+    poetry run bin/async-redis
+
 # run the standard tests (default target)
 test:
-    /bin/rm -fr logs
+    /bin/rm -fr logs/*
     /bin/rm -fr data/test-*
     cp data/redis-template.conf data/test-template.conf
     poetry run pytest --cov=async_redis/ --cov-branch tests/

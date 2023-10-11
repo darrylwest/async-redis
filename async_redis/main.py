@@ -1,15 +1,19 @@
 """Main project logic."""
 
+import atexit
 import logging
 import tomllib
 from pathlib import Path
 from typing import Self
 
 import rich.repr
-from rich.console import Console
 
-log = logging.getLogger("main")
-console = Console()
+# needs to be here rather than __init__
+from async_redis.loglib import LogLib
+
+LogLib.init_logger()
+
+log = logging.getLogger("async-redis")
 
 
 @rich.repr.auto
@@ -34,6 +38,8 @@ class Config:
         self.host = "localhost"
         self.dryrun = False
 
+        log.info(f"init {self}")
+
     def is_valid(self) -> bool:
         """Return True if the configuration file is valid, else False."""
         errors = []
@@ -52,14 +58,13 @@ class Config:
             errors.append("data directory is missing from config.toml")
 
         if not errors:
-            console.log("[green3]ok.")
+            log.info("ok.")
             return True
 
         for error in errors:
             log.error(error)
-            console.print(f"[red]Config ERROR! {error}")
 
-        console.print(f"Total of {len(errors)} detected.")
+        log.info(f"Total of {len(errors)} detected.")
 
         return False
 
@@ -126,3 +131,19 @@ def read_template(template_filename: str) -> list[str]:
             lines.append(line.strip())
 
     return lines
+
+
+async def start(args: list) -> None:
+    """Start the application."""
+    log.info(f"start the application with args: {args}")
+    cfg = read_config()
+    config = Config.from_toml(cfg["AsyncRedis"])
+    log.info(f"{config}")
+
+
+def shutdown():
+    """Shutdown the application."""
+    log.info("application shutdown...")
+
+
+atexit.register(shutdown)

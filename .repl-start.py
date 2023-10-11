@@ -8,15 +8,8 @@ from datetime import datetime
 # import importlib
 
 from rich import inspect
-import platform
-
-# print("pid=", os.getpid())
 
 user_home = Path.home().as_posix()
-
-# from pydomkeys.keys import KeyGen
-# from faker import Faker
-# fake = Faker()
 
 from tests import test_main
 from tests.fake_generator import FakeData

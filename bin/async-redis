@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+# dpw@plaza.localdomain
+# 2023-10-11 20:40:38
+
+import asyncio
+import sys
+from async_redis.main import start
+from pathlib import Path
+
+if __name__ == '__main__':
+    log_dir = Path('logs')
+    if not log_dir.exists():
+        Path.mkdir(log_dir)
+
+    asyncio.run(start(sys.argv[1:]))
+

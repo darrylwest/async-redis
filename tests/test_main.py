@@ -1,5 +1,6 @@
 """Aysnc Redis Tests"""
 
+import pytest
 import tomllib
 from pathlib import Path
 
@@ -51,3 +52,13 @@ def test_version():
         project = tomllib.load(f)
 
     assert vers == project["tool"]["poetry"]["version"]
+
+
+@pytest.mark.asyncio
+async def test_main():
+    args = []
+    await main.start(args)
+
+
+def test_shutdown():
+    main.shutdown()

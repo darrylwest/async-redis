@@ -17,20 +17,16 @@ class LogLib:
 
     @staticmethod
     def init_logger():
-        """Initialize the database logger."""
+        """Initialize the main logger."""
         name = "async-redis"
         lib = LogLib(name)
-        lib.init_file_logger(f"logs/{name}.log")
+        lib.init_file_logger(f"{LOG_DIR}/{name}.log")
 
     def __init__(self, name: str):
         """Initialize the logger with or withow config."""
         self.level = logging.INFO
         self.version = "0.1.0"
         self.max_bytes = 100_000
-
-        log_dir = Path(LOG_DIR)
-        if not log_dir.exists():
-            Path.mkdir(log_dir)
 
         self.name = name
 
