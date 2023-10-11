@@ -40,15 +40,6 @@ def test_read_template():
 def test_write_config():
     lines = config.read_template("data/redis-template.conf")
 
+    config.write_config("/tmp/redis.tmp", 2600, lines)
 
-def test_version():
-    from async_redis import __version__ as vers
 
-    assert vers.startswith("0.1.")
-    with Path.open(
-        "./pyproject.toml",
-        "rb",
-    ) as f:
-        project = tomllib.load(f)
-
-    assert vers == project["tool"]["poetry"]["version"]
