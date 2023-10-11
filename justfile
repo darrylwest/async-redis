@@ -2,7 +2,6 @@
 project := "async_redis"
 
 export PYTHONPATH := "async_redis/"
-# export PYTHON := "/Library/Frameworks/Python.framework/Versions/3.11/bin/bpython"
 
 alias cov := cover
 alias form := format
