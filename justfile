@@ -10,7 +10,7 @@ alias todo := todos
 
 # run the application
 run:
-    /bin/rm -fr logs
+    /bin/rm -fr logs/*
     poetry run bin/async-redis
 
 # run the standard tests (default target)
