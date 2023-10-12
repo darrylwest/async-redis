@@ -3,7 +3,7 @@
 import logging
 import os
 
-import redis
+import redis.asyncio as redis
 import rich.repr
 
 from async_redis.config import Config
@@ -17,20 +17,23 @@ class Db:
 
     def __init__(self, ctx: Config):
         """Initialize the db object."""
-        log.info("db logger test")
         self.ctx = ctx
+        self.client = None
 
     async def connect(self):
         """Connect to redis."""
-        redis_auth = os.getenv("REDIS_AUTH", "testpw")
+        if self.client is None:
+            log.info('create the db client')
+            redis_auth = os.getenv("REDIS_AUTH", "testpw")
 
-        conn = redis.asyncio.client.Redis(
-            host="localhost",
-            port=self.ctx.port,
-            db=0,
-            password=redis_auth,
-        )
+            self.client = redis.Redis(
+                host='localhost',
+                port=self.ctx.port,
+                db=0,
+                password=redis_auth,
+                protocol=3,
+            )
 
-        await conn.ping()
+            await self.client.ping()
 
-        return conn
+        return self.client
