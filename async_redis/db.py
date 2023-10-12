@@ -23,11 +23,11 @@ class Db:
     async def connect(self):
         """Connect to redis."""
         if self.client is None:
-            log.info('create the db client')
+            log.info("create the db client")
             redis_auth = os.getenv("REDIS_AUTH", "testpw")
 
             self.client = redis.Redis(
-                host='localhost',
+                host="localhost",
                 port=self.ctx.port,
                 db=0,
                 password=redis_auth,

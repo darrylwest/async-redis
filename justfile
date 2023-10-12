@@ -7,6 +7,7 @@ alias cov := cover
 alias form := format
 alias pre := precommit
 alias todo := todos
+alias int := integration
 
 # run the application
 run:
@@ -25,6 +26,10 @@ test:
 cover:
     poetry run coverage report -m
     poetry run coverage html --title="Async Redis Test Coverage"
+
+# run the integration tests
+integration:
+    poetry run tests/integration-tests.py --insert
 
 # invoke black, isort, ruff with --fix flag
 format:
