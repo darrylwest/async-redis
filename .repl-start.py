@@ -19,7 +19,7 @@ fake_data = FakeData()
 
 from async_redis import main
 from async_redis.main import Config
+from async_redis.db import Db
 
 
-
-
+ctx = Config.read_config()

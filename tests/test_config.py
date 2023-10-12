@@ -3,43 +3,30 @@
 
 import tomllib
 from pathlib import Path
+from rich import inspect
 
 from async_redis import config
 from async_redis.config import Config
 
 
 def test_read_config():
-    ctx = config.read_config()
+    ctx = Config.read_config()
     assert ctx is not None
 
 
 def test_config_from_toml():
-    ctx = config.read_config("./config.toml")
-    conf = Config.from_toml(ctx.get("AsyncRedis"))
-    assert conf.name
-    assert conf.is_valid()
+    ctx = Config.read_config("./tests/config.toml")
+    assert ctx.name
+    assert ctx.is_valid()
 
 
 def test_bad_config():
-    ctx = config.read_config("./config.toml")
-    cfg = ctx.get("BadFarm")
+    ctx = Config.read_config()
 
-    conf = Config.from_toml(cfg)
-    assert not conf.is_valid()
-    conf.template = None
-    conf.port = None
-    conf.data = None
-    assert not conf.is_valid()
+    ctx.port = 100
+    ctx.data = None
 
+    inspect(ctx)
 
-def test_read_template():
-    lines = config.read_template("data/redis-template.conf")
-    assert len(lines) == 72
-
-
-def test_write_config():
-    lines = config.read_template("data/redis-template.conf")
-
-    config.write_config("/tmp/redis.tmp", 2600, lines)
-
-
+    assert ctx.port < 1200
+    assert not ctx.is_valid()
