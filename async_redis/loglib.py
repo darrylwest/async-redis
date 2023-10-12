@@ -11,16 +11,19 @@ from pathlib import Path
 # TODO(dpw): read from env var
 LOG_DIR = "logs"
 
+LOGGERS = ['async-redis', 'redis-db']
+
 
 class LogLib:
     """LogLib configures logging."""
 
     @staticmethod
-    def init_logger():
-        """Initialize the main logger."""
-        name = "async-redis"
-        lib = LogLib(name)
-        lib.init_file_logger(f"{LOG_DIR}/{name}.log")
+    def init_loggers():
+        """Initialize all loggers."""
+
+        for name in LOGGERS:
+            lib = LogLib(name)
+            lib.init_file_logger(f"{LOG_DIR}/{name}.log")
 
     def __init__(self, name: str):
         """Initialize the logger with or withow config."""

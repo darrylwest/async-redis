@@ -7,11 +7,6 @@ from typing import Self
 
 import rich.repr
 
-# needs to be here rather than __init__
-from async_redis.loglib import LogLib
-
-LogLib.init_logger()
-
 log = logging.getLogger("async-redis")
 
 
