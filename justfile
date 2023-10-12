@@ -15,6 +15,7 @@ run:
 
 # run the standard tests (default target)
 test:
+    mkdir -p logs
     /bin/rm -fr logs/*
     /bin/rm -fr data/test-*
     cp data/redis-template.conf data/test-template.conf
