@@ -37,3 +37,9 @@ class Db:
             await self.client.ping()
 
         return self.client
+
+    async def ping(self) -> bool:
+        """Ping the client connection."""
+        conn = await self.connect()
+        pong = await conn.ping()
+        return pong

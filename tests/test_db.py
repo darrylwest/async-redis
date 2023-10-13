@@ -29,10 +29,11 @@ async def test_connect():
     dbsize = await client.dbsize()
     assert dbsize >= 0
 
-    for _ in range(5):
-        resp = await client.ping()
-        await asyncio.sleep(0.002)
-        assert resp
+    resp = await client.ping()
+    assert resp
+
+    pong = await db.ping()
+    assert pong
 
     await client.aclose()
 
@@ -63,7 +64,6 @@ async def test_pipeline():
         assert exists
 
         mstr = await client.get(user.key)
-        # inspect(mstr)
 
     new_dbsize = await client.dbsize()
     assert new_dbsize == dbsize + (count * 2)
