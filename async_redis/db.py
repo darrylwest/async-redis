@@ -10,6 +10,8 @@ from async_redis.config import Config
 
 log = logging.getLogger("redis-db")
 
+# STOPWORD = "STOP"
+
 
 @rich.repr.auto
 class Db:
