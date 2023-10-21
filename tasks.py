@@ -8,7 +8,11 @@ from invoke import task
 @task
 def startdb(ctx):
     pw = os.getenv('REDISCLI_AUTH')
-    ctx.run(f'redis-server data/redis-2900.conf')
+    ctx.run('redis-server data/redis-2900.conf')
+
+@task
+def stopdb(ctx):
+    ctx.run('redis-cli -p 2900 shutdown')
 
 @task
 def run(ctx):
