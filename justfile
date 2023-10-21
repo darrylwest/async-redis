@@ -9,6 +9,10 @@ alias pre := precommit
 alias todo := todos
 alias int := integration
 
+# start the redis instance
+startdb:
+    redis-server data/redis-2900.conf
+
 # run the application
 run:
     /bin/rm -fr logs/*

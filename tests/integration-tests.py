@@ -6,7 +6,7 @@
 import asyncio
 import sys
 from time import perf_counter
-from rich import print, inspect
+from rich import print  # , inspect
 import json
 from tests.fake_generator import FakeData
 

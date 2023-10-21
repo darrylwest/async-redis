@@ -10,8 +10,6 @@ from async_redis.config import Config
 
 log = logging.getLogger("redis-db")
 
-# STOPWORD = "STOP"
-
 
 @rich.repr.auto
 class Db:
@@ -26,7 +24,7 @@ class Db:
         """Connect to redis."""
         if self.client is None:
             log.info("create the db client")
-            redis_auth = os.getenv("REDIS_AUTH", "testpw")
+            redis_auth = os.getenv("REDISCLI_AUTH")
 
             self.client = redis.Redis(
                 host="localhost",
