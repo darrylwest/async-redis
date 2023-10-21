@@ -2,7 +2,13 @@
 task runner, @see https://www.pyinvoke.org/
 '''
 
+import os
 from invoke import task
+
+@task
+def startdb(ctx):
+    pw = os.getenv('REDISCLI_AUTH')
+    ctx.run(f'redis-server data/redis-2900.conf')
 
 @task
 def run(ctx):
