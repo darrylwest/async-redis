@@ -4,11 +4,20 @@ task runner, @see https://www.pyinvoke.org/
 
 import os
 from invoke import task
+from pathlib import Path
 
 @task
 def startdb(ctx):
+    port = '2900'
     pw = os.getenv('REDISCLI_AUTH')
-    ctx.run('redis-server data/redis-2900.conf')
+    path = Path.cwd() / Path("data/redis-2900.conf")
+    text = path.read_text().replace('{{PORT}}', port).replace('{{PASSWORD}}', pw)
+
+    path = Path.cwd() / Path("data/redis.conf")
+    with path.open(mode='w', encoding='utf-8') as file:
+        file.write(text)
+
+    ctx.run('redis-server data/redis.conf')
 
 @task
 def stopdb(ctx):

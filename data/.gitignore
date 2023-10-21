@@ -1,3 +1,4 @@
 test-*
 *.rdb
 *.pid
+redis.conf
